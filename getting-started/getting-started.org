@@ -2,3 +2,5 @@
 
 Following the Python tutorial I will try to achieve the same. But at this point
 I will have to start a folder structure for my examples.
+
+Also I need to try creation of a separate project

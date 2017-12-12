@@ -4,11 +4,19 @@ This is work in progress for learning GTK+ and Haskell. It is inspired by [[http
 It is based on my previous experiment [[http://python-gtk-3-tutorial.readthedocs.io/en/latest/][Gatakawa]] and is intended for easy running
 the examples and will try to be compatible with Ubuntu 16.04 if possible.
 ** Project structure
-Although it might change my idea is to have each example as a separate project
-folder. So probably I will use cabal for the examples. Because I am a Haskell
-beginner I will have to explain every step to myself. Any notes about the use
-of cabal or stack will go to this section.
-
+Although it might change my idea is to have each example except the Installation
+as a separate project folder. So probably I will use cabal for the examples.
+Because I am a Haskell beginner I will have to explain every step to myself. Any
+notes about the use of cabal or stack will go to this section.
+*** cabal build tool
+For the time being we will try using cabal for package management. So at the
+root of the tutorial in the folder where you have the README.org file please run
+the following
+#+BEGIN_EXAMPLE
+cabal sandbox init
+cabal update
+#+END_EXAMPLE
+That will create a repository of packages for our examples.
 ** The tutorial
 + [[file:Installation.org][Installation]]
-+ [[file:getting-started.org][Getting Started]]
++ [[file:getting-started/getting-started.org][Getting Started]]
