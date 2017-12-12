@@ -18,4 +18,6 @@ cabal.sandbox.config
 .stack-work/
 cabal.project.local
 .HTF/
-.dir-locals.el # Emacs autocommit on save
+
+# Emacs autocommit on save
+.dir-locals.el
