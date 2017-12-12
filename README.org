@@ -1,0 +1,5 @@
+* My Haskell GTK+3 tutorial
+This is work in progress for learning GTK+ and Haskell. It is inspired by [[http://python-gtk-3-tutorial.readthedocs.io/en/latest/][The Python GTK+3 Tutorial]]
+
+It is based on my previous experiment [[http://python-gtk-3-tutorial.readthedocs.io/en/latest/][Gatakawa]] and is intended for easy running
+the examples and will try to be compatible with Ubuntu 16.04 if possible.
