@@ -11,3 +11,4 @@ of cabal or stack will go to this section.
 
 ** The tutorial
 + [[file:Installation.org][Installation]]
++ [[file:getting-started.org][Getting Started]]

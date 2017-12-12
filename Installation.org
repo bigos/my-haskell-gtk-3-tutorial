@@ -1,2 +1,15 @@
-* 1 Installation
-FINISH ME
+* Installation
+The first step involves installation of development libraries needed for our code.
+I will try to give instructions for [[https://en.wikipedia.org/wiki/Ubuntu_(operating_system)][Ubuntu]] and [[http://www.msys2.org/][MSYS2]].
+** Ubuntu
+Hopefully Haskell platform that comes with the system should work, However I
+use one of previous versions of Haskell Platform. Also you have to install
+~libgtk-3-dev~
+
+TODO
+** MSYS2
+On Windows with MSYS2 you need to install specific version of GHC for my
+examples to work. This gist has more instructions.
+https://gist.github.com/bigos/62defeec09a06f18ee38daf644af5340
+Also you need to install at least ~mingw-w64-x86_64-gtk3~
+TODO
