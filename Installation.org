@@ -1,2 +1,42 @@
-* 1 Installation
-FINISH ME
+* Installation
+
+** development libraries
+The first step involves installation of development libraries needed for our code.
+I will try to give instructions for [[https://en.wikipedia.org/wiki/Ubuntu_(operating_system)][Ubuntu]] and [[http://www.msys2.org/][MSYS2]].
+*** Ubuntu
+Hopefully Haskell platform that comes with the system should work, However I
+use one of previous versions of Haskell Platform. Also you have to install
+~libgtk-3-dev~
+#+BEGIN_EXAMPLE
+sudo apt-get install libgtk-3-dev
+#+END_EXAMPLE
+TODO
+*** MSYS2
+On Windows with MSYS2 you need to install specific version of GHC for my
+examples to work. This gist has more instructions.
+https://gist.github.com/bigos/62defeec09a06f18ee38daf644af5340
+Also you need to install at least ~mingw-w64-x86_64-gtk3~
+
+TODO
+
+** cabal build tool
+For the time being we will try using cabal for package management. So at the
+root of the tutorial in the folder where you have the README.org file please run
+the following
+#+BEGIN_EXAMPLE
+cabal sandbox init
+cabal update
+#+END_EXAMPLE
+That will create a repository for packages used by our examples.
+
+The next step is to install the Haskell library used in our examples. In your
+terminal run:
+#+BEGIN_EXAMPLE
+cabal install gi-gtk
+#+END_EXAMPLE
+The above command will take a long time and in the end will say:
+#+BEGIN_EXAMPLE
+Installed gi-gtk-3.0.18
+#+END_EXAMPLE
+If it gives you an error message it probably means there is a problem with the
+development libraries.
