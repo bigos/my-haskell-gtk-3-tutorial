@@ -16,6 +16,7 @@ On Windows with MSYS2 you need to install specific version of GHC for my
 examples to work. This gist has more instructions.
 https://gist.github.com/bigos/62defeec09a06f18ee38daf644af5340
 Also you need to install at least ~mingw-w64-x86_64-gtk3~
+
 TODO
 
 ** cabal build tool
