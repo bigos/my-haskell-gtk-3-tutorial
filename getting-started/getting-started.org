@@ -104,7 +104,7 @@ Edit the Main.hs file to look like this. Explanation will follow.
 #+BEGIN_EXAMPLE haskell
   {-# LANGUAGE OverloadedStrings, OverloadedLabels #-}
 
-
+  module Main where
 
   import qualified GI.Gtk as Gtk
   import Data.GI.Base
@@ -120,15 +120,9 @@ Edit the Main.hs file to look like this. Explanation will follow.
 
 #+END_EXAMPLE
 
-** Build your project
-#+BEGIN_EXAMPLE
-cabal install
-cabal build
-#+END_EXAMPLE
-
 ** Run it
 Run the following and you will see the window. Close it and have some well
 deserved rest.
 #+BEGIN_EXAMPLE
-./dist/dist-sandbox-4b75b305/build/simple-example/simple-example
+cabal run simple-example
 #+END_EXAMPLE
