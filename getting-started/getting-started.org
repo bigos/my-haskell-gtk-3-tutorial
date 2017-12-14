@@ -121,7 +121,8 @@ Edit the Main.hs file to look like this. Explanation will follow.
 #+END_EXAMPLE
 
 ** Run it
-Make sure the packages declared in cabal file are installed.
+Make sure the packages declared in the cabal file are installed. In the terminal
+run the following command.
 #+BEGIN_EXAMPLE
 cabal install
 #+END_EXAMPLE
