@@ -101,7 +101,7 @@ Change the build-depends section of the cabal file to look like this.
 
 *** Haskell source
 Edit the Main.hs file to look like this. Explanation will follow.
-#+BEGIN_EXAMPLE haskell
+#+BEGIN_SRC haskell
   {-# LANGUAGE OverloadedStrings, OverloadedLabels #-}
 
   module Main where
@@ -117,8 +117,7 @@ Edit the Main.hs file to look like this. Explanation will follow.
     on win #destroy Gtk.mainQuit
     #showAll win
     Gtk.main
-
-#+END_EXAMPLE
+#+END_SRC
 
 ** Run it
 Make sure the packages declared in the cabal file are installed. In the terminal
