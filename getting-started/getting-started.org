@@ -121,8 +121,13 @@ Edit the Main.hs file to look like this. Explanation will follow.
 #+END_EXAMPLE
 
 ** Run it
+Make sure the packages declared in cabal file are installed.
+#+BEGIN_EXAMPLE
+cabal install
+#+END_EXAMPLE
+
 Run the following and you will see the window. Close it and have some well
 deserved rest.
 #+BEGIN_EXAMPLE
-cabal run simple-example
+cabal run
 #+END_EXAMPLE
