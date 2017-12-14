@@ -39,4 +39,4 @@ The above command will take a long time and in the end will say:
 Installed gi-gtk-3.0.18
 #+END_EXAMPLE
 If it gives you an error message it probably means there is a problem with the
-development libraries.
+development libraries and you have to search the Internet for help.
