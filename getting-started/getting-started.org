@@ -95,7 +95,7 @@ executable simple-example
 Change the build-depends section of the cabal file to look like this.
 #+BEGIN_EXAMPLE
   build-depends:       base >=4.9 && <4.10
-                     , gi-gtk -any
+                     , gi-gtk >= 3.0.17
                      , haskell-gi-base -any
 #+END_EXAMPLE
 
