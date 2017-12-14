@@ -5,11 +5,10 @@ It is based on my previous experiment [[http://python-gtk-3-tutorial.readthedocs
 the examples and will try to be compatible with Ubuntu 16.04 if possible.
 
 ** Project structure
-Although it might change, my idea is to have each example except the
-Installation as a separate project folder. Probably I will use cabal for the
-examples. Because I am a Haskell beginner I will have to explain every step to
-myself.
-
+The org files will contain the instructions and code snippets that should let
+the user do everything on his own, just following the instructions. That means
+the user will be responsible for creation of the additional folders for the
+projects. The instructions should be clear about it.
 ** The tutorial
-+ [[file:Installation.org][Installation]]
-+ [[file:getting-started/getting-started.org][Getting Started]]
++ [[file:installation.org][Installation]]
++ [[file:getting-started.org][Getting Started]]
