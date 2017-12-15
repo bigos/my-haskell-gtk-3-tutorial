@@ -125,9 +125,12 @@ run the following command.
 #+BEGIN_EXAMPLE
 cabal install
 #+END_EXAMPLE
+If you do not have the required packages installed, the above command might
+take long time. On my machine it was about 20 minutes. After that, running
+it again finished quickly.
 
-Run the following and you will see the window. Close it and have some well
-deserved rest.
+Run the following and you will see the expected Gtk window. Close it and have
+some well deserved rest.
 #+BEGIN_EXAMPLE
 cabal run
 #+END_EXAMPLE
