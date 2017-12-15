@@ -44,7 +44,8 @@ Close the cmd terminal and open it again by opening the cmdlauncher.cmd on your
 Desktop. Running echo %PATH% will show added paths of the newly installed
 Haskell compiler.
 
-Run ~ghc --version~ and ~cabal --version~ to confirm the installation went well.
+Run ~ghc --version~, ~cabal --version~ and ~stack --version~ to confirm the
+installation went well.
 
 **** Edit cabal config
 The command ~cabal user-config init~ gives you the location of the cabal file.
