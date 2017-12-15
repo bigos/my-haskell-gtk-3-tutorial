@@ -1,0 +1,67 @@
+* Installation
+
+** development libraries
+The first step involves installation of development libraries needed for our code.
+I will try to give instructions for [[https://en.wikipedia.org/wiki/Ubuntu_(operating_system)][Ubuntu]] and [[http://www.msys2.org/][MSYS2]].
+*** Ubuntu
+Hopefully Haskell platform that comes with the system should work, However I
+use one of previous versions of Haskell Platform. Also you have to install
+~libgtk-3-dev~
+#+BEGIN_EXAMPLE
+sudo apt-get install libgtk-3-dev
+#+END_EXAMPLE
+TODO
+
+*** Windows 10 and MSYS2
+The example assumes you have a 64 bit architecture.
+
+Download MSYS2 installer from this page
+http://www.msys2.org and follow the update instructions
+
+Create a file ~cmdlauncher.cmd~ on the Desktop and put in it:
+#+BEGIN_EXAMPLE
+set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
+set XDG_DATA_DIRS=c:/msys64/mingw64/share
+set PKG_CONFIG_PATH=c:/msys64/mingw64/lib/pkgconfig
+set HASKELL_GI_GIR_SEARCH_PATH=c:/msys64/mingw64/share/gir-1.0
+cmd
+#+END_EXAMPLE
+
+Right click on the cmdlauncher.cmd and open it, it will launch a cmd terminal.
+
+Install MSYS2 packages
+In the cmd terminal paste the following
+#+BEGIN_EXAMPLE
+pacman -S -q --noconfirm mingw64/mingw-w64-x86_64-pkg-config mingw64/mingw-w64-x86_64-gobject-introspection mingw64/mingw-w64-x86_64-gtksourceview3 mingw64/mingw-w64-x86_64-webkitgtk3
+#+END_EXAMPLE
+
+Install this version of Haskell Platform
+https://www.haskell.org/platform/download/8.0.2/HaskellPlatform-8.0.2-minimal-x86_64-setup.exe
+
+Close the cmd terminal and open it again by opening the cmdlauncher.cmd on your Desktop.
+Running echo %PATH% will show added paths of the newly installed Haskell
+
+Run ghc --version and cabal --version
+
+edit cabal config
+The command ~cabal user-config init~ gives you the location of the cabal file.
+So edit the cabal file and modify the extra-*-dirs to point to msys libraries.
+#+BEGIN_EXAMPLE
+-- flags:
+extra-include-dirs: c:/msys64/mingw64/include
+-- deterministic:
+-- cid:
+extra-lib-dirs: c:/msys64/mingw64/lib
+-- extra-framework-dirs:
+extra-prog-path: C:\Users\IEUser\AppData\Roaming\cabal\bin
+-- instantiate-with:
+#+END_EXAMPLE
+
+Update the packages list and install two packages.
+#+BEGIN_EXAMPLE
+cabal update
+cabal install alex happy
+#+END_EXAMPLE
+
+In the subsequent examples of this tutorial use cmd started with the
+cmdlauncher.cmd
