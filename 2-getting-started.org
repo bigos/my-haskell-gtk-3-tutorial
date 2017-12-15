@@ -3,13 +3,15 @@ Following the Python tutorial I will try to achieve the same. But at this point
 I will have to start a folder structure for my examples.
 
 ** Create a directory
-Let's create a simple project and call it simple-example.
+Let's create a simple project and call it simple-example and cd into it.
 #+BEGIN_EXAMPLE
 stack new simple-example simple
+cd ./simple-example
 #+END_EXAMPLE
 
 ** cabal file
-Edit ~sinple-example.cabal~ file and modify ~build-depends~ section to look like:
+Edit ~sinple-example.cabal~ file and modify ~build-depends~ section to look
+like this:
 #+BEGIN_EXAMPLE
   build-depends:       base >= 4.7 && < 5
                      , gi-gtk >= 3.0
@@ -36,9 +38,18 @@ Edit ./src/Main.hs and make it look like following:
     Gtk.main
 #+END_SRC
 
-** Run
-Let's install and run our example.
+** Compile and run
+When you run you OS version of ~stack install~ for the first time, it will take
+long time to complete. It's over 20 minutes on my machine
+
+*** Linux version
 #+BEGIN_EXAMPLE
 stack install
 stack exec simple-example
+#+END_EXAMPLE
+
+*** Windows version
+#+BEGIN_EXAMPLE
+stack install --system-ghc
+simple-example.exe
 #+END_EXAMPLE
