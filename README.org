@@ -10,5 +10,5 @@ the user do everything on his own, just following the instructions. That means
 the user will be responsible for creation of the additional folders for the
 projects. The instructions should be clear about it.
 ** The tutorial
-+ [[file:installation.org][Installation]]
-+ [[file:getting-started.org][Getting Started]]
++ [[file:1-installation.org][1 Installation]]
++ [[file:2-getting-started.org][2 Getting Started]]
