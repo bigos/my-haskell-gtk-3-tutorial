@@ -18,7 +18,7 @@ like this:
                      , haskell-gi-base -any
 #+END_EXAMPLE
 
-** Source file
+** Source file - Simple Example
 Edit ./src/Main.hs and make it look like following:
 #+BEGIN_SRC haskell
   {-# LANGUAGE OverloadedStrings #-}
@@ -75,3 +75,59 @@ to the right of it will reveal more information.
 
 I had to replace Python's 'delete-event' with onWidgetDestroy, because it's type
 better suited my needs. But it you want [[https://hackage.haskell.org/package/gi-gtk-3.0.18/docs/GI-Gtk-Objects-Widget.html#v:onWidgetDeleteEvent][onWidgetDeleteEvent]] is also available.
+
+This page https://github.com/haskell-gi/gi-gtk-examples has more examples of
+GI.Gtk haskell code.
+
+** Source file - Extended Example
+When you edit the code in Emacs, the editor will suggest to add imports when you
+type the function names in the source.
+#+BEGIN_SRC haskell
+  {-# LANGUAGE OverloadedStrings #-}
+
+  module Main where
+
+  import qualified GI.Gtk as GI (init,
+                                 main)
+  import GI.Gtk (buttonNew,
+                 containerAdd,
+                 mainQuit,
+                 onButtonClicked,
+                 onWidgetDestroy,
+                 setButtonLabel,
+                 windowNew,
+                 windowSetTitle,
+                 widgetShowAll)
+  import GI.Gtk.Enums
+         (WindowType(..))
+
+  main :: IO ()
+  main = do
+    _ <- GI.init Nothing
+
+    win <- windowNew WindowTypeToplevel
+    windowSetTitle win "Hello World"
+    _ <- onWidgetDestroy win mainQuit
+
+    btn <- buttonNew
+    setButtonLabel btn "Click here"
+    _ <- onButtonClicked btn (putStrLn "Button clicked")
+
+    containerAdd win btn
+    widgetShowAll win
+    GI.main
+#+END_SRC
+
+** Searching for functions in REPL
+When you start ~stack repl~ in Emacs eshell you will get auto completion. Typing
+'GI.Gtk.co' will show prompt with possible completions down-cased. When you
+select one possibility you will get a correct camel-cased version.
+#+BEGIN_EXAMPLE
+*Main> GI.Gtk.containeradd
+
+<interactive>:1:1: error:
+    Not in scope: ‘GI.Gtk.containeradd’
+    Perhaps you meant ‘GI.Gtk.containerAdd’ (imported from GI.Gtk)
+    No module named ‘GI.Gtk’ is imported.
+*Main> GI.Gtk.co
+#+END_EXAMPLE
