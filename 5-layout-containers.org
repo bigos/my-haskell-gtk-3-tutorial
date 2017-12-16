@@ -14,7 +14,49 @@ the same way as we did in [[file:2-getting-started.org][Getting Started]] in the
 *** Edit source
 Edit ~./src/Main.hs~ and make it look as follows:
 #+BEGIN_SRC haskell
+  {-# LANGUAGE OverloadedStrings #-}
 
+  module Main where
+
+  import qualified GI.Gtk as GI (init,
+                                 main)
+  import GI.Gtk (buttonNew,
+                 boxNew,
+                 containerAdd,
+                 boxPackStart,
+                 mainQuit,
+                 onButtonClicked,
+                 onWidgetDestroy,
+                 setButtonLabel,
+                 windowNew,
+                 windowSetTitle,
+                 widgetShowAll)
+  import GI.Gtk.Enums
+         (WindowType(..), Orientation(..))
+
+  main :: IO ()
+  main = do
+    _ <- GI.init Nothing
+
+    win <- windowNew WindowTypeToplevel
+    windowSetTitle win "Hello World"
+    _ <- onWidgetDestroy win mainQuit
+
+    box <- boxNew OrientationHorizontal 10
+
+    btn1 <- buttonNew
+    setButtonLabel btn1 "Hello"
+    _ <- onButtonClicked btn1 (putStrLn "Button 1 clicked")
+    boxPackStart box btn1 True True 0
+
+    btn2 <- buttonNew
+    setButtonLabel btn2 "Farewell"
+    _ <- onButtonClicked btn2 (putStrLn "Button 2 clicked")
+    boxPackStart box btn2 True True 0
+
+    containerAdd win box
+    widgetShowAll win
+    GI.main
 #+END_SRC
 *** Compile and run.
 Compile the same way as you did in Getting Started.
