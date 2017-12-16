@@ -2,7 +2,7 @@
 Following the Python tutorial I will try to achieve the same. But at this point
 I will have to start a folder structure for my examples.
 
-** Create a directory
+** Create a project
 Let's create a simple project and call it simple-example and cd into it.
 #+BEGIN_EXAMPLE
 stack new simple-example simple

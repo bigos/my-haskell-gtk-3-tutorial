@@ -1,6 +1,26 @@
 * Layout Containers
 ** Boxes
-TODO
+*** Create a project and edit the cabal file.
+Do you remember how we have created a project in [[file:2-getting-started.org][Getting Started]] in the section
+*Create a project*? Similarly, create a simple project, call it layout-box and cd
+into it.
+#+BEGIN_EXAMPLE
+stack new layout-box simple
+cd layout-box/
+#+END_EXAMPLE
+
+Next edit the cabal file and make sure we have the required dependencies added
+the same way as we did in [[file:2-getting-started.org][Getting Started]] in the section *cabal file*.
+*** Edit source
+Edit ~./src/Main.hs~ and make it look as follows:
+#+BEGIN_SRC haskell
+
+#+END_SRC
+*** Compile and run.
+Compile the same way as you did in Getting Started. Now, the command for running
+will be different because compilation step has created an executable with the
+different name. It is not ~simple-example~, you can find name of the executable
+at the bottom of the compilation output.
 ** Grid
 TODO
 ** ListBox
