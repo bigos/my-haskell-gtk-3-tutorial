@@ -131,3 +131,18 @@ select one possibility you will get a correct camel-cased version.
     No module named ‘GI.Gtk’ is imported.
 *Main> GI.Gtk.co
 #+END_EXAMPLE
+
+When you import GI.Gtk in REPL like this:
+#+BEGIN_EXAMPLE
+import GI.Gtk
+#+END_EXAMPLE
+
+You can search without the prefix.
+#+BEGIN_EXAMPLE
+*Main GI.Gtk> containeradd
+
+<interactive>:4:1: error:
+    • Variable not in scope: containeradd
+    • Perhaps you meant ‘containerAdd’ (imported from GI.Gtk)
+*Main GI.Gtk>
+#+END_EXAMPLE
