@@ -113,7 +113,6 @@ You can search without the prefix.
 *Main GI.Gtk>
 #+END_EXAMPLE
 
-
 ** Source file - Extended Example
 After learning how to Translate Gtk symbols and use auto-completion in Emacs
 let's edit the Main.hs file of your simple example to look like this:
