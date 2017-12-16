@@ -21,3 +21,6 @@ cabal.project.local
 
 # Emacs autocommit on save
 .dir-locals.el
+
+# html files exported by org-mode
+*.html
