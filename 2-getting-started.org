@@ -21,29 +21,27 @@ like this:
 ** Source file
 Edit ./src/Main.hs and make it look like following:
 #+BEGIN_SRC haskell
-{-# LANGUAGE OverloadedStrings #-}
+  {-# LANGUAGE OverloadedStrings #-}
 
-module Main where
+  module Main where
 
-import qualified GI.Gtk as GI (init,
-                               main)
-import GI.Gtk (mainQuit,
-               onWidgetDestroy,
-               windowNew,
-               windowSetTitle,
-               widgetShowAll)
-import GI.Gtk.Enums
-       (WindowType(..))
+  import qualified GI.Gtk as GI (init,
+                                 main)
+  import GI.Gtk (mainQuit,
+                 onWidgetDestroy,
+                 windowNew,
+                 widgetShowAll)
+  import GI.Gtk.Enums
+         (WindowType(..))
 
+  main :: IO ()
+  main = do
+    _ <- GI.init Nothing
 
-main :: IO ()
-main = do
-  _ <- GI.init Nothing
-
-  win <- windowNew WindowTypeToplevel
-  _ <- onWidgetDestroy win mainQuit
-  widgetShowAll win
-  GI.main
+    win <- windowNew WindowTypeToplevel
+    _ <- onWidgetDestroy win mainQuit
+    widgetShowAll win
+    GI.main
 
 #+END_SRC
 
