@@ -79,9 +79,44 @@ better suited my needs. But it you want [[https://hackage.haskell.org/package/gi
 This page https://github.com/haskell-gi/gi-gtk-examples has more examples of
 GI.Gtk haskell code.
 
-** Source file - Extended Example
+** Emacs tips
+*** imported functions
 When you edit the code in Emacs, the editor will suggest to add imports when you
 type the function names in the source.
+
+*** Searching for functions in REPL
+When you start ~stack repl~ in Emacs eshell you will get auto completion. Typing
+'GI.Gtk.co' will show prompt with possible completions down-cased. When you
+select one possibility you will get a correct camel-cased version.
+#+BEGIN_EXAMPLE
+*Main> GI.Gtk.containeradd
+
+<interactive>:1:1: error:
+    Not in scope: ‘GI.Gtk.containeradd’
+    Perhaps you meant ‘GI.Gtk.containerAdd’ (imported from GI.Gtk)
+    No module named ‘GI.Gtk’ is imported.
+*Main> GI.Gtk.co
+#+END_EXAMPLE
+
+When you import GI.Gtk in REPL like this:
+#+BEGIN_EXAMPLE
+import GI.Gtk
+#+END_EXAMPLE
+
+You can search without the prefix.
+#+BEGIN_EXAMPLE
+*Main GI.Gtk> containeradd
+
+<interactive>:4:1: error:
+    • Variable not in scope: containeradd
+    • Perhaps you meant ‘containerAdd’ (imported from GI.Gtk)
+*Main GI.Gtk>
+#+END_EXAMPLE
+
+
+** Source file - Extended Example
+After learning how to Translate Gtk symbols and use auto-completion in Emacs
+let's edit the Main.hs file of your simple example to look like this:
 #+BEGIN_SRC haskell
   {-# LANGUAGE OverloadedStrings #-}
 
@@ -118,31 +153,4 @@ type the function names in the source.
     GI.main
 #+END_SRC
 
-** Searching for functions in REPL
-When you start ~stack repl~ in Emacs eshell you will get auto completion. Typing
-'GI.Gtk.co' will show prompt with possible completions down-cased. When you
-select one possibility you will get a correct camel-cased version.
-#+BEGIN_EXAMPLE
-*Main> GI.Gtk.containeradd
-
-<interactive>:1:1: error:
-    Not in scope: ‘GI.Gtk.containeradd’
-    Perhaps you meant ‘GI.Gtk.containerAdd’ (imported from GI.Gtk)
-    No module named ‘GI.Gtk’ is imported.
-*Main> GI.Gtk.co
-#+END_EXAMPLE
-
-When you import GI.Gtk in REPL like this:
-#+BEGIN_EXAMPLE
-import GI.Gtk
-#+END_EXAMPLE
-
-You can search without the prefix.
-#+BEGIN_EXAMPLE
-*Main GI.Gtk> containeradd
-
-<interactive>:4:1: error:
-    • Variable not in scope: containeradd
-    • Perhaps you meant ‘containerAdd’ (imported from GI.Gtk)
-*Main GI.Gtk>
-#+END_EXAMPLE
+When you compile and run it, you will see a Window with a button.
