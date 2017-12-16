@@ -21,26 +21,35 @@ like this:
 ** Source file
 Edit ./src/Main.hs and make it look like following:
 #+BEGIN_SRC haskell
-  {-# LANGUAGE OverloadedStrings, OverloadedLabels #-}
+{-# LANGUAGE OverloadedStrings #-}
 
-  module Main where
+module Main where
 
-  import qualified GI.Gtk as Gtk
-  import Data.GI.Base
+import qualified GI.Gtk as GI (init,
+                               main)
+import GI.Gtk (mainQuit,
+               onWidgetDestroy,
+               windowNew,
+               windowSetTitle,
+               widgetShowAll)
+import GI.Gtk.Enums
+       (WindowType(..))
 
-  main :: IO ()
-  main = do
-    Gtk.init Nothing
 
-    win <- new Gtk.Window [ #title := "Hi there" ]
-    on win #destroy Gtk.mainQuit
-    #showAll win
-    Gtk.main
+main :: IO ()
+main = do
+  _ <- GI.init Nothing
+
+  win <- windowNew WindowTypeToplevel
+  _ <- onWidgetDestroy win mainQuit
+  widgetShowAll win
+  GI.main
+
 #+END_SRC
 
 ** Compile and run
 When you run you OS version of ~stack install~ for the first time, it will take
-long time to complete. It's over 20 minutes on my machine
+long time to complete. It's over 20 minutes on my machine. It is quick after that.
 
 *** Linux version
 #+BEGIN_EXAMPLE
@@ -53,3 +62,18 @@ stack exec simple-example
 stack install --system-ghc
 simple-example.exe
 #+END_EXAMPLE
+
+** Translation of Gtk symbols
+When Python example contains something like ~show_all~, then on the Haskell side
+you need to look for something like showAll.
+
+Go to the documentation
+https://hackage.haskell.org/package/gi-gtk-3.0.18/docs/doc-index-All.html
+and search all index.
+
+Among other potential candidates ~widgetShowAll~ is found. The method operates
+on a widget so it makes sense. Clicking on the link
+to the right of it will reveal more information.
+
+I had to replace Python's 'delete-event' with onWidgetDestroy, because it's type
+better suited my needs. But it you want [[https://hackage.haskell.org/package/gi-gtk-3.0.18/docs/GI-Gtk-Objects-Widget.html#v:onWidgetDeleteEvent][onWidgetDeleteEvent]] is also available.
