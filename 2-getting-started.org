@@ -3,7 +3,10 @@ Following the Python tutorial I will try to achieve the same. But at this point
 I will have to start a folder structure for my examples.
 
 ** Create a project
-Let's create a simple project and call it simple-example and cd into it.
+Each new project will be created in ~HaskellGtk~ folder. So create the folder if
+you have not do it yet and cd to it.
+
+Create a simple project and call it simple-example and cd into it.
 #+BEGIN_EXAMPLE
 stack new simple-example simple
 cd ./simple-example
