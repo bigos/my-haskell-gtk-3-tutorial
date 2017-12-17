@@ -1,0 +1,150 @@
+* Layout Containers
+** Boxes
+*** Create a project and edit the cabal file.
+Do you remember how we have created a project in [[file:2-getting-started.org][Getting Started]], in the section
+*Create a project*? Similarly, create a simple project, call it layout-box and cd
+into it.
+#+BEGIN_EXAMPLE
+stack new layout-box simple
+cd layout-box/
+#+END_EXAMPLE
+
+Next edit the cabal file and make sure we have the required dependencies added
+the same way as we did in [[file:2-getting-started.org][Getting Started]] in the section *cabal file*.
+*** Edit source
+Edit ~./src/Main.hs~ and make it look as follows:
+#+BEGIN_SRC haskell
+  {-# LANGUAGE OverloadedStrings #-}
+
+  module Main where
+
+  import qualified GI.Gtk as GI (init,
+                                 main)
+  import GI.Gtk (buttonNew,
+                 boxNew,
+                 containerAdd,
+                 boxPackStart,
+                 mainQuit,
+                 onButtonClicked,
+                 onWidgetDestroy,
+                 setButtonLabel,
+                 windowNew,
+                 windowSetTitle,
+                 widgetShowAll)
+  import GI.Gtk.Enums
+         (WindowType(..), Orientation(..))
+
+  main :: IO ()
+  main = do
+    _ <- GI.init Nothing
+
+    win <- windowNew WindowTypeToplevel
+    windowSetTitle win "Hello World"
+
+    box <- boxNew OrientationHorizontal 10
+
+    btn1 <- buttonNew
+    setButtonLabel btn1 "Hello"
+    _ <- onButtonClicked btn1 (putStrLn "Hello")
+    boxPackStart box btn1 True True 0
+
+    btn2 <- buttonNew
+    setButtonLabel btn2 "Goodbye"
+    _ <- onButtonClicked btn2 (putStrLn "Goodbye")
+    boxPackStart box btn2 True True 0
+
+    containerAdd win box
+
+    _ <- onWidgetDestroy win mainQuit
+    widgetShowAll win
+    GI.main
+#+END_SRC
+*** Compile and run.
+Compile the same way as you did in [[file:2-getting-started.org][Getting Started]] section *Compile and run*.
+
+The command used to run your executable will be different because compilation step has
+created an executable with the different name. It is not ~simple-example~, you
+can find name of the executable at the bottom of the compilation output.
+Depending on your OS it will be either ~stack exec layout-box~ or ~layout-box.exe~.
+
+** Grid
+
+*** Create a project and edit the cabal file
+Following the usual procedure crate new project ~grid-example~, cd into it and
+edit the cabal file.
+
+*** Edit source
+#+BEGIN_SRC haskell
+  {-# LANGUAGE OverloadedStrings #-}
+
+  module Main where
+
+  import qualified GI.Gtk as GI (init,
+                                 main)
+  import GI.Gtk (buttonNew,
+                 containerAdd,
+                 gridAttach,
+                 gridAttachNextTo,
+                 mainQuit,
+                 onWidgetDestroy,
+                 setButtonLabel,
+                 widgetShowAll,
+                 windowNew,
+                 windowSetTitle,
+                 gridNew)
+
+  import GI.Gtk.Enums
+         (WindowType(..), PositionType(..))
+
+  main :: IO ()
+  main = do
+    _ <- GI.init Nothing
+
+    win <- windowNew WindowTypeToplevel
+    windowSetTitle win "Grid example"
+
+    grid <- gridNew
+    containerAdd win grid
+
+    button1 <- buttonNew
+    setButtonLabel button1 "Button 1"
+
+    button2 <- buttonNew
+    setButtonLabel button2 "Button 2"
+
+    button3 <- buttonNew
+    setButtonLabel button3 "Button 3"
+
+    button4 <- buttonNew
+    setButtonLabel button4 "Button 4"
+
+    button5 <- buttonNew
+    setButtonLabel button5 "Button 5"
+
+    button6 <- buttonNew
+    setButtonLabel button6 "Button 6"
+
+    containerAdd grid button1
+    gridAttach grid button2 1 0 2 1
+    gridAttachNextTo grid button3 (Just button1) PositionTypeBottom 1 2
+    gridAttachNextTo grid button4 (Just button3) PositionTypeRight 2 1
+    gridAttach grid button5 1 2 1 1
+    gridAttachNextTo grid button6 (Just button5) PositionTypeRight 1 1
+
+    _ <- onWidgetDestroy win mainQuit
+    widgetShowAll win
+    GI.main
+#+END_SRC
+
+*** Compile and run
+Compile and run ~grid-example~ the same way you did in previous examples.
+** ListBox
+TODO
+** Stack and StackSwither
+TODO
+** HeaderBar
+TODO
+** FlowBox
+TODO
+** Notebook
+TODO
