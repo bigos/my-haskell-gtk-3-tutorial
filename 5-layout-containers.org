@@ -40,21 +40,22 @@ Edit ~./src/Main.hs~ and make it look as follows:
 
     win <- windowNew WindowTypeToplevel
     windowSetTitle win "Hello World"
-    _ <- onWidgetDestroy win mainQuit
 
     box <- boxNew OrientationHorizontal 10
 
     btn1 <- buttonNew
     setButtonLabel btn1 "Hello"
-    _ <- onButtonClicked btn1 (putStrLn "Button 1 clicked")
+    _ <- onButtonClicked btn1 (putStrLn "Hello")
     boxPackStart box btn1 True True 0
 
     btn2 <- buttonNew
-    setButtonLabel btn2 "Farewell"
-    _ <- onButtonClicked btn2 (putStrLn "Button 2 clicked")
+    setButtonLabel btn2 "Goodbye"
+    _ <- onButtonClicked btn2 (putStrLn "Goodbye")
     boxPackStart box btn2 True True 0
 
     containerAdd win box
+
+    _ <- onWidgetDestroy win mainQuit
     widgetShowAll win
     GI.main
 #+END_SRC
