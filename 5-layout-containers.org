@@ -11,7 +11,7 @@ cd layout-box/
 
 Next edit the cabal file and make sure we have the required dependencies added
 the same way as we did in [[file:2-getting-started.org][Getting Started]] in the section *cabal file*.
-*** Edit source
+*** Edit the source
 Edit ~./src/Main.hs~ and make it look as follows:
 #+BEGIN_SRC haskell
   {-# LANGUAGE OverloadedStrings #-}
@@ -73,7 +73,7 @@ Depending on your OS it will be either ~stack exec layout-box~ or ~layout-box.ex
 Following the usual procedure crate new project ~grid-example~, cd into it and
 edit the cabal file.
 
-*** Edit source
+*** Edit the source
 #+BEGIN_SRC haskell
   {-# LANGUAGE OverloadedStrings #-}
 
@@ -139,6 +139,162 @@ edit the cabal file.
 *** Compile and run
 Compile and run ~grid-example~ the same way you did in previous examples.
 ** ListBox
+*** Create a project and edit the cabal file
+Following the usual procedure crate new project ~list-box-demo~, cd into it and
+edit the cabal file.
+*** Edit the source
+#+BEGIN_SRC haskell
+    {-# LANGUAGE OverloadedStrings #-}
+
+    module Main where
+
+    import Debug.Trace
+
+    import qualified GI.Gtk as GI (init,
+                                   main)
+    import GI.Gtk (buttonNew,
+                   boxNew,
+                   boxPackStart,
+                   checkButtonNew,
+                   comboBoxTextNew,
+                   comboBoxTextInsert,
+                   listBoxRowGetHeader,
+                   labelNew,
+                   labelGetLabel,
+                   labelGetText,
+                   labelSetXalign,
+                   listBoxNew,
+                   listBoxRowNew,
+                   listBoxInsert,
+                   listBoxRowGetIndex,
+                   containerAdd,
+                   containerSetBorderWidth,
+                   gridAttach,
+                   gridAttachNextTo,
+                   listBoxSetSelectionMode,
+                   mainQuit,
+                   onListBoxRowSelected,
+                   onWidgetDestroy,
+                   setButtonLabel,
+                   setWidgetValign,
+                   switchNew,
+                   widgetShowAll,
+                   widgetGetName,
+                   windowNew,
+                   windowSetTitle,
+                   gridNew)
+
+    import GI.Gtk.Enums (
+      Align(..),
+      Orientation(..),
+      PositionType(..),
+      SelectionMode(..),
+      WindowType(..)
+           )
+
+    main :: IO ()
+    main = do
+      _ <- GI.init Nothing
+
+      win <- windowNew WindowTypeToplevel
+      windowSetTitle win "ListBox Demo"
+      containerSetBorderWidth win 10
+
+      boxOuter <- boxNew OrientationVertical 6
+      containerAdd win boxOuter
+
+      listBox <- listBoxNew
+      listBoxSetSelectionMode listBox SelectionModeNone
+      boxPackStart boxOuter listBox True True 0
+
+      row <- listBoxRowNew
+      hbox <- boxNew OrientationHorizontal 50
+      containerAdd row hbox
+      vbox <-boxNew OrientationVertical 0
+      boxPackStart hbox vbox True True 0
+
+      label1 <- labelNew (Just "Automatic Date & Time")
+      labelSetXalign label1 0
+      label2 <- labelNew (Just "Requires internet access")
+      labelSetXalign label2 0
+      boxPackStart vbox label1 True True 0
+      boxPackStart vbox label2 True True 0
+
+      switch <- switchNew
+      setWidgetValign switch AlignCenter
+      boxPackStart hbox switch False True 0
+
+      containerAdd listBox row
+
+      row <- listBoxRowNew
+      hbox <- boxNew OrientationHorizontal 50
+      containerAdd row hbox
+      label <- labelNew (Just "Enable Automatic Update")
+      labelSetXalign label 0
+      check <- checkButtonNew
+      boxPackStart hbox label True True 0
+      boxPackStart hbox check False True 0
+
+      containerAdd listBox row
+
+      row <- listBoxRowNew
+      hbox <- boxNew OrientationHorizontal 50
+      containerAdd row hbox
+      label <- labelNew (Just "Date Format")
+      labelSetXalign label 0
+      combo <- comboBoxTextNew
+      comboBoxTextInsert combo 0 (Just"0") "24-hour"
+      comboBoxTextInsert combo 1 (Just "1") "AM/PM"
+      boxPackStart hbox label True True 0
+      boxPackStart hbox combo False True 0
+
+      containerAdd listBox row
+
+      listbox2 <- listBoxNew
+      --items <- ["This"," is"," a"," sorted"," ListBox"," Fail"]
+      lb <- listBoxRowNew
+      dat <- labelNew ( "This")
+      containerAdd lb dat
+      listBoxInsert listbox2 lb (-1)
+
+      lb <- listBoxRowNew
+      dat <- labelNew ( "is")
+      containerAdd lb dat
+      listBoxInsert listbox2 lb (-1)
+
+      lb <- listBoxRowNew
+      dat <- labelNew ( "a")
+      containerAdd lb dat
+      listBoxInsert listbox2 lb (-1)
+
+      lb <- listBoxRowNew
+      dat <- labelNew ( "sorted")
+      containerAdd lb dat
+      listBoxInsert listbox2 lb (-1)
+
+      lb <- listBoxRowNew
+      dat <- labelNew ( "ListBox")
+      containerAdd lb dat
+      listBoxInsert listbox2 lb (-1)
+
+      lb <- listBoxRowNew
+      dat <- labelNew ( "Fail")
+      containerAdd lb dat
+      listBoxInsert listbox2 lb (-1)
+
+      -- how do I solve this silly type error???
+      onListBoxRowSelected listbox2 (\row -> putStrLn (listBoxRowGetIndex row))
+
+
+      boxPackStart boxOuter listbox2 True True 0
+      widgetShowAll listbox2
+
+      _ <- onWidgetDestroy win mainQuit
+      widgetShowAll win
+      GI.main
+#+END_SRC
+*** Compile and run
+Compile and run ~list-box-demo~ the same way you did in previous examples.
 TODO
 ** Stack and StackSwither
 TODO
