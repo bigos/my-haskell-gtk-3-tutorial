@@ -259,7 +259,7 @@ edit the cabal file.
 *** Compile and run
 Compile and run ~list-box-demo~ the same way you did in previous examples.
 TODO
-** Stack and StackSwither
+** Stack and StackSwitcher
 TODO
 ** HeaderBar
 TODO
