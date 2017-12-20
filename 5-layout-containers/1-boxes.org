@@ -1,0 +1,67 @@
+* Boxes
+*** Create a project and edit the cabal file.
+Do you remember how we have created a project in [[file:2-getting-started.org][Getting Started]], in the section
+*Create a project*? Similarly, create a simple project, call it layout-box and cd
+into it.
+#+BEGIN_EXAMPLE
+stack new layout-box simple
+cd layout-box/
+#+END_EXAMPLE
+
+Next edit the cabal file and make sure we have the required dependencies added
+the same way as we did in [[file:2-getting-started.org][Getting Started]] in the section *cabal file*.
+*** Edit the source
+Edit ~./src/Main.hs~ and make it look as follows:
+#+BEGIN_SRC haskell
+  {-# LANGUAGE OverloadedStrings #-}
+
+  module Main where
+
+  import qualified GI.Gtk as GI (init,
+                                 main)
+  import GI.Gtk (buttonNew,
+                 boxNew,
+                 containerAdd,
+                 boxPackStart,
+                 mainQuit,
+                 onButtonClicked,
+                 onWidgetDestroy,
+                 setButtonLabel,
+                 windowNew,
+                 windowSetTitle,
+                 widgetShowAll)
+  import GI.Gtk.Enums
+         (WindowType(..), Orientation(..))
+
+  main :: IO ()
+  main = do
+    _ <- GI.init Nothing
+
+    win <- windowNew WindowTypeToplevel
+    windowSetTitle win "Hello World"
+
+    box <- boxNew OrientationHorizontal 10
+
+    btn1 <- buttonNew
+    setButtonLabel btn1 "Hello"
+    _ <- onButtonClicked btn1 (putStrLn "Hello")
+    boxPackStart box btn1 True True 0
+
+    btn2 <- buttonNew
+    setButtonLabel btn2 "Goodbye"
+    _ <- onButtonClicked btn2 (putStrLn "Goodbye")
+    boxPackStart box btn2 True True 0
+
+    containerAdd win box
+
+    _ <- onWidgetDestroy win mainQuit
+    widgetShowAll win
+    GI.main
+#+END_SRC
+*** Compile and run.
+Compile the same way as you did in [[file:2-getting-started.org][Getting Started]] section *Compile and run*.
+
+The command used to run your executable will be different because compilation step has
+created an executable with the different name. It is not ~simple-example~, you
+can find name of the executable at the bottom of the compilation output.
+Depending on your OS it will be either ~stack exec layout-box~ or ~layout-box.exe~.

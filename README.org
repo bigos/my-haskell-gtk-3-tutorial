@@ -11,5 +11,5 @@ the user will be responsible for creation of the additional folders for the
 projects. The instructions should be clear about it.
 ** The tutorial
 + [[file:1-installation.org][1 Installation]]
-+ [[file:2-getting-started.org][2 Getting Started]]
-+ [[file:5-layout-containers.org][5 Layout Containers]]
++ [[file:2-getting-started/README.org][Getting Started]]
++ [[file:5-layout-containers/README.org][Layout Containers]]

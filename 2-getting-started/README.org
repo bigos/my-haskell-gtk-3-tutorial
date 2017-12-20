@@ -1,0 +1,7 @@
+* 2 Getting Started
+
+** Simple Example
+[[file:1-simple-example.org][Simple Example]]
+
+** Extended Example
+[[file:2-extended-example.org][Extended Example]]
