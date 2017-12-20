@@ -6,9 +6,8 @@
 
 + [[file:3-list-box.org][List Box]]
 
++ [[file:4-stack-and-stack-switcher.org][Stack and Switcher]]
 
-** Stack and StackSwitcher
-TODO
 ** HeaderBar
 TODO
 ** FlowBox

@@ -1,6 +1,8 @@
 * Boxes
 ** Create a project and edit the cabal file.
-Do you remember how we have created a project in [[file:2-getting-started.org][Getting Started]], in the section
+Do you remember how we have created a project in
+[[file:~/Programming/Haskell/my-haskell-gtk-3-tutorial/2-getting-started/1-simple-example.org][Simple Example]]
+, in the section
 *Create a project*? Similarly, create a simple project, call it layout-box and cd
 into it.
 #+BEGIN_EXAMPLE
@@ -9,7 +11,9 @@ cd layout-box/
 #+END_EXAMPLE
 
 Next edit the cabal file and make sure we have the required dependencies added
-the same way as we did in [[file:2-getting-started.org][Getting Started]] in the section *cabal file*.
+the same way as we did in
+[[file:~/Programming/Haskell/my-haskell-gtk-3-tutorial/2-getting-started/1-simple-example.org][Simple Example]]
+in the section *cabal file*.
 ** Edit the source
 Edit ~./src/Main.hs~ and make it look as follows:
 #+BEGIN_SRC haskell
@@ -59,7 +63,9 @@ Edit ~./src/Main.hs~ and make it look as follows:
     GI.main
 #+END_SRC
 ** Compile and run.
-Compile the same way as you did in [[file:2-getting-started.org][Getting Started]] section *Compile and run*.
+Compile the same way as you did in
+[[file:~/Programming/Haskell/my-haskell-gtk-3-tutorial/2-getting-started/1-simple-example.org][Simple Example]]
+section *Compile and run*.
 
 The command used to run your executable will be different because compilation step has
 created an executable with the different name. It is not ~simple-example~, you

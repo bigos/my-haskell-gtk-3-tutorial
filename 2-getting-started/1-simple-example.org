@@ -1,5 +1,4 @@
 * Simple Example
-* Getting Started
 Following the Python tutorial I will try to achieve the same. But at this point
 I will have to start a folder structure for my examples.
 

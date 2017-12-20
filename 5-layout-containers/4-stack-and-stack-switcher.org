@@ -1,15 +1,7 @@
 * Stack and Stack Switcher
 ** Create a project and edit the cabal file.
-Do you remember how we have created a project in [[file:2-getting-started.org][Getting Started]], in the section
-*Create a project*? Similarly, create a simple project, call it
-stack-and-stack-switcher and cd into it.
-#+BEGIN_EXAMPLE
-stack new stack-and-stack-switcher simple
-cd layout-box/
-#+END_EXAMPLE
-
-Next edit the cabal file and make sure we have the required dependencies added
-the same way as we did in [[file:2-getting-started.org][Getting Started]] in the section *cabal file*.
+Following the usual procedure crate new project ~stack-and-stack-switcher~, cd into it and
+edit the cabal file.
 ** Edit the source
 Edit ~./src/Main.hs~ and make it look as follows:
 #+BEGIN_SRC haskell
@@ -73,4 +65,4 @@ Edit ~./src/Main.hs~ and make it look as follows:
 
 #+END_SRC
 ** Compile and run.
-Compile the same way as you did in [[file:2-getting-started.org][Getting Started]] section *Compile and run*.
+Compile and run ~stack-and-stack-switcher~ the same way you did in previous examples.

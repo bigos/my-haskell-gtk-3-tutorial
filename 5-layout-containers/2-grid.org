@@ -1,12 +1,8 @@
 * Grid
-
-** Grid
-
-*** Create a project and edit the cabal file
+** Create a project and edit the cabal file
 Following the usual procedure crate new project ~grid-example~, cd into it and
 edit the cabal file.
-
-*** Edit the source
+** Edit the source
 #+BEGIN_SRC haskell
   {-# LANGUAGE OverloadedStrings #-}
 
@@ -69,5 +65,5 @@ edit the cabal file.
     GI.main
 #+END_SRC
 
-*** Compile and run
+** Compile and run
 Compile and run ~grid-example~ the same way you did in previous examples.
