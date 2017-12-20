@@ -1,5 +1,5 @@
 * Boxes
-*** Create a project and edit the cabal file.
+** Create a project and edit the cabal file.
 Do you remember how we have created a project in [[file:2-getting-started.org][Getting Started]], in the section
 *Create a project*? Similarly, create a simple project, call it layout-box and cd
 into it.
@@ -10,7 +10,7 @@ cd layout-box/
 
 Next edit the cabal file and make sure we have the required dependencies added
 the same way as we did in [[file:2-getting-started.org][Getting Started]] in the section *cabal file*.
-*** Edit the source
+** Edit the source
 Edit ~./src/Main.hs~ and make it look as follows:
 #+BEGIN_SRC haskell
   {-# LANGUAGE OverloadedStrings #-}
@@ -58,7 +58,7 @@ Edit ~./src/Main.hs~ and make it look as follows:
     widgetShowAll win
     GI.main
 #+END_SRC
-*** Compile and run.
+** Compile and run.
 Compile the same way as you did in [[file:2-getting-started.org][Getting Started]] section *Compile and run*.
 
 The command used to run your executable will be different because compilation step has

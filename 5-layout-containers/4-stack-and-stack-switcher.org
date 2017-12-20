@@ -1,0 +1,76 @@
+* Stack and Stack Switcher
+** Create a project and edit the cabal file.
+Do you remember how we have created a project in [[file:2-getting-started.org][Getting Started]], in the section
+*Create a project*? Similarly, create a simple project, call it
+stack-and-stack-switcher and cd into it.
+#+BEGIN_EXAMPLE
+stack new stack-and-stack-switcher simple
+cd layout-box/
+#+END_EXAMPLE
+
+Next edit the cabal file and make sure we have the required dependencies added
+the same way as we did in [[file:2-getting-started.org][Getting Started]] in the section *cabal file*.
+** Edit the source
+Edit ~./src/Main.hs~ and make it look as follows:
+#+BEGIN_SRC haskell
+  {-# LANGUAGE OverloadedStrings #-}
+
+  module Main where
+
+  import qualified GI.Gtk as GI (init,
+                                   main)
+  import GI.Gtk (boxNew,
+                 boxPackStart,
+                 checkButtonNewWithLabel,
+                 containerAdd,
+                 labelNew,
+                 labelSetMarkup,
+                 mainQuit,
+                 onWidgetDestroy,
+                 stackAddTitled,
+                 stackNew,
+                 stackSetTransitionDuration,
+                 stackSetTransitionType,
+                 stackSwitcherNew,
+                 stackSwitcherSetStack,
+                 widgetShowAll,
+                 windowNew,
+                 windowSetTitle)
+
+  import GI.Gtk.Enums (WindowType(..),
+                       Orientation(..),
+                       StackTransitionType(..))
+
+  main :: IO ()
+  main = do
+    _ <- GI.init Nothing
+
+    win <- windowNew WindowTypeToplevel
+    windowSetTitle win "Stack Demo"
+
+    vbox <- boxNew OrientationVertical 6
+    containerAdd win vbox
+
+    stack <- stackNew
+    stackSetTransitionType stack StackTransitionTypeSlideLeftRight
+    stackSetTransitionDuration stack 1000
+
+    checkbutton <- checkButtonNewWithLabel "Click me!"
+    stackAddTitled stack checkbutton "check" "Check Button!"
+
+    label <- labelNew (Just "")
+    labelSetMarkup label "<big>A fancy label</big>"
+    stackAddTitled stack label "label" "A label"
+
+    stackSwitcher <- stackSwitcherNew
+    stackSwitcherSetStack stackSwitcher (Just stack)
+    boxPackStart vbox stackSwitcher True True 0
+    boxPackStart vbox stack True True 0
+
+    _ <- onWidgetDestroy win mainQuit
+    widgetShowAll win
+    GI.main
+
+#+END_SRC
+** Compile and run.
+Compile the same way as you did in [[file:2-getting-started.org][Getting Started]] section *Compile and run*.
