@@ -1,10 +1,10 @@
 * List Box
 This is an incomplete version of the Python example. I simply do not understand
 Haskell well enough to go into nuances of handling the event results.
-*** Create a project and edit the cabal file
+** Create a project and edit the cabal file
 Following the usual procedure crate new project ~list-box-demo~, cd into it and
 edit the cabal file.
-*** Edit the source
+** Edit the source
 #+BEGIN_SRC haskell
   {-# LANGUAGE OverloadedStrings #-}
   module Main where
@@ -105,8 +105,9 @@ edit the cabal file.
 
     listbox2 <- listBoxNew
 
-    mapM_ (\x  -> listBoxAddLabel listbox2 x ) ["This"," is"," a"," sorted"," ListBox"," Fail"]
+    mapM_ (\x  -> listBoxAddLabel listbox2 x ) ["This","is","a","ListBox"]
 
+    -- how do I print the strings assigned to the list box options
     _ <- onListBoxRowSelected listbox2 (\(Just r) -> listBoxRowGetIndex r >>= print)
 
     boxPackStart boxOuter listbox2 True True 0
@@ -114,8 +115,7 @@ edit the cabal file.
     _ <- onWidgetDestroy win mainQuit
     widgetShowAll win
     GI.main
-
 #+END_SRC
-*** Compile and run
+** Compile and run
 Compile and run ~list-box-demo~ the same way you did in previous examples.
 TODO
