@@ -1,0 +1,11 @@
+* Header Bar
+** Create a project and edit the cabal file.
+Following the usual procedure crate new project ~header-bar~, cd into it and
+edit the cabal file.
+** Edit the source
+Edit ~./src/Main.hs~ and make it look as follows:
+#+BEGIN_SRC haskell
+
+#+END_SRC
+** Compile and run.
+Compile and run ~header-bar~ the same way you did in previous examples.
