@@ -64,4 +64,12 @@ Edit ~./src/Main.hs~ and make it look as follows:
     GI.main
 #+END_SRC
 ** Compile and run.
-Compile and run ~stack-and-stack-switcher~ the same way you did in previous examples.
+If you have installation problems run the following command
+#+BEGIN_EXAMPLE
+stack solver --update-config
+#+END_EXAMPLE
+and update resolver in the yaml file.
+#+BEGIN_EXAMPLE
+resolver: lts-9.17
+#+END_EXAMPLE
+Otherwise , compile and run ~stack-and-stack-switcher~ the same way you did in previous examples.
