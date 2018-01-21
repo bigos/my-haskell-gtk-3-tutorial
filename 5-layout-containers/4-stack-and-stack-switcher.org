@@ -62,7 +62,6 @@ Edit ~./src/Main.hs~ and make it look as follows:
     _ <- onWidgetDestroy win mainQuit
     widgetShowAll win
     GI.main
-
 #+END_SRC
 ** Compile and run.
 Compile and run ~stack-and-stack-switcher~ the same way you did in previous examples.
