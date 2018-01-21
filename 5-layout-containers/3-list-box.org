@@ -107,8 +107,12 @@ edit the cabal file.
 
     mapM_ (\x  -> listBoxAddLabel listbox2 x ) ["This","is","a","ListBox"]
 
-    -- how do I print the strings assigned to the list box options
-    _ <- onListBoxRowSelected listbox2 (\(Just r) -> listBoxRowGetIndex r >>= print)
+    _ <- onListBoxRowSelected listbox2 (\(Just r) -> do
+                                           cc <- containerGetChildren r
+                                           mlabel <- castTo Label (head cc)
+                                           case mlabel of
+                                             Nothing -> putStrLn "Not a label!"
+                                             Just label -> (labelGetText label) >>= putStrLn . unpack)
 
     boxPackStart boxOuter listbox2 True True 0
 
