@@ -8,8 +8,8 @@
 
 + [[file:4-stack-and-stack-switcher.org][Stack and Switcher]]
 
-** HeaderBar
-TODO
++ [[file:5-header-bar.org][Header Bar]]
+
 ** FlowBox
 TODO
 ** Notebook
