@@ -1,0 +1,153 @@
+* Flow Box
+** Create a project and edit the cabal file.
+Following the usual procedure crate new project ~flow-box~, cd into it and
+edit the cabal file.
+** Comments
+This is the first time I used GUI creation in separate function. The code needs cleanup.
+** Edit the source
+Edit ~./src/Main.hs~ and make it look as follows:
+#+BEGIN_SRC haskell
+  {-# LANGUAGE OverloadedStrings #-}
+
+  module Main where
+
+  import Data.Text
+  import GI.Gdk (colorParse, newZeroRGBA,rGBAParse)
+  import qualified GI.Gtk as GI (init,
+                                 main)
+  import GI.Gtk (mainQuit,
+                 onWidgetDestroy,
+                 windowNew,widgetSetValign,
+                 widgetShowAll, toWidget, castTo,
+                 containerSetBorderWidth,
+                 headerBarNew, headerBarSetTitle, headerBarSetSubtitle,headerBarSetShowCloseButton,
+                 scrolledWindowNew, scrolledWindowSetPolicy,
+                 flowBoxNew, flowBoxSetMaxChildrenPerLine, flowBoxSetSelectionMode,
+                 containerAdd, buttonNew, drawingAreaNew, widgetSetSizeRequest, widgetOverrideBackgroundColor
+                 )
+
+  import GI.Gtk.Objects.Window
+  import GI.Gtk.Objects.Button
+  import GI.Gtk.Flags
+  import GI.Gtk.Objects.Adjustment (noAdjustment)
+
+  import GI.Gtk.Enums (WindowType(..), PolicyType(..),Align(..),SelectionMode(..))
+
+  --colorSwatchNew :: [Char] -> IO Button
+  colorSwatchNew color = do
+    rgba <- newZeroRGBA
+    rGBAParse rgba (pack color)
+
+    button <- buttonNew
+
+    area <- drawingAreaNew
+    widgetSetSizeRequest area 24 24
+    widgetOverrideBackgroundColor area [StateFlagsNormal] (Just rgba)
+    containerAdd button area
+    return button
+
+  createFlowbox fb = do
+    mapM_ (\color -> (colorSwatchNew color >>= (\b -> containerAdd fb b)) ) colors
+    where colors = [ "AliceBlue",
+                     "AntiqueWhite",
+                     "AntiqueWhite1",
+                     "AntiqueWhite2",
+                     "AntiqueWhite3",
+                     "AntiqueWhite4",
+                     "aqua",
+                     "aquamarine",
+                     "aquamarine1",
+                     "aquamarine2",
+                     "aquamarine3",
+                     "aquamarine4",
+                     "azure",
+                     "azure1",
+                     "azure2",
+                     "azure3",
+                     "azure4",
+                     "beige",
+                     "bisque",
+                     "bisque1",
+                     "bisque2",
+                     "bisque3",
+                     "bisque4",
+                     "black",
+                     "BlanchedAlmond",
+                     "blue",
+                     "blue1",
+                     "blue2",
+                     "blue3",
+                     "blue4",
+                     "BlueViolet",
+                     "brown",
+                     "brown1",
+                     "brown2",
+                     "brown3",
+                     "brown4",
+                     "burlywood",
+                     "burlywood1",
+                     "burlywood2",
+                     "burlywood3",
+                     "burlywood4",
+                     "CadetBlue",
+                     "CadetBlue1",
+                     "CadetBlue2",
+                     "CadetBlue3",
+                     "CadetBlue4",
+                     "chartreuse",
+                     "chartreuse1",
+                     "chartreuse2",
+                     "chartreuse3",
+                     "chartreuse4",
+                     "chocolate",
+                     "chocolate1",
+                     "chocolate2",
+                     "chocolate3",
+                     "chocolate4",
+                     "coral",
+                     "coral1",
+                     "coral2",
+                     "coral3",
+                     "coral4" ]
+
+  flowboxWindow :: IO GI.Gtk.Objects.Window.Window
+  flowboxWindow = do
+    win <- windowNew WindowTypeToplevel
+    windowSetTitle win "Flow Box demo"
+    containerSetBorderWidth win 10
+    windowSetDefaultSize win 300 250
+
+    header <- headerBarNew
+    headerBarSetTitle header (Just "Flow Box")
+    headerBarSetSubtitle header (Just "Sample FlowBox app")
+    headerBarSetShowCloseButton  header True
+
+    windowSetTitlebar win (Just header)
+
+    scrolled <- scrolledWindowNew noAdjustment noAdjustment
+    scrolledWindowSetPolicy scrolled PolicyTypeNever PolicyTypeAutomatic
+
+    flowbox <- flowBoxNew
+    widgetSetValign flowbox AlignStart
+    flowBoxSetMaxChildrenPerLine flowbox 30
+    flowBoxSetSelectionMode flowbox SelectionModeNone
+
+    createFlowbox flowbox
+
+    containerAdd scrolled flowbox
+    containerAdd win scrolled
+
+    return win
+
+  main :: IO ()
+  main = do
+    _ <- GI.init Nothing
+
+    win <- flowboxWindow
+    _ <- onWidgetDestroy win mainQuit
+    widgetShowAll win
+    GI.main
+
+#+END_SRC
+** Compile and run
+   Compile and run ~flow-box~ the same way you did in previous examples.

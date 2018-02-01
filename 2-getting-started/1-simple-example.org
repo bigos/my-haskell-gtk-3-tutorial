@@ -21,6 +21,13 @@ like this:
                      , haskell-gi-base -any
 #+END_EXAMPLE
 
+** stack.yaml file
+For successful compilation you might have to edit the resolver. The following
+seems to give best results.
+#+BEGIN_EXAMPLE
+resolver: lts-9.18
+#+END_EXAMPLE
+
 ** Source file - Simple Example
 Edit ./src/Main.hs and make it look like following:
 #+BEGIN_SRC haskell
