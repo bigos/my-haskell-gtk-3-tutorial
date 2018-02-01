@@ -9,117 +9,63 @@ Edit ~./src/Main.hs~ and make it look as follows:
 
   module Main where
 
-  import Debug.Trace
-
   import qualified GI.Gtk as GI (init,
                                  main)
-  import GI.Gtk hiding (init, main)
+  import GI.Gtk (mainQuit,
+                 onWidgetDestroy, containerSetBorderWidth,
+                 windowNew, windowSetTitle, windowSetDefaultSize, windowSetTitlebar,
+                 widgetShowAll, containerAdd,
+                 headerBarNew,headerBarSetShowCloseButton, headerBarSetTitle,
+                 headerBarPackEnd, headerBarPackStart,
+                 boxNew, buttonNew, arrowNew, textViewNew,
+                 styleContextAddClass, widgetGetStyleContext
+                )
+  import GI.Gtk.Objects.Button
+  import GI.Gtk.Objects.Image
+  import GI.Gio.Objects.ThemedIcon
+  import GI.Gtk.Objects.StyleContext
 
-  import GI.Gtk.Enums (
-    Align(..),
-    Orientation(..),
-    PositionType(..),
-    SelectionMode(..),
-    WindowType(..)
-         )
+  import GI.Gtk.Enums
+         (WindowType(..), IconSize(..), Orientation(..), ArrowType(..), ShadowType(..))
+
+  headerBarWindow = do
+    win <- windowNew WindowTypeToplevel
+    windowSetTitle win "Header Bar Demo"
+    containerSetBorderWidth win 10
+    windowSetDefaultSize win 400 200
+
+    hb <- headerBarNew
+    headerBarSetShowCloseButton hb True
+    headerBarSetTitle hb (Just "HeaderBar example")
+    windowSetTitlebar win (Just hb)
+
+    button1 <- buttonNew
+    icon <- themedIconNew "mail-send-receive-symbolic"
+    image <- imageNewFromGicon icon 4
+    containerAdd button1 image
+    headerBarPackEnd hb button1
+
+    box <- boxNew OrientationHorizontal 10
+    (widgetGetStyleContext box) >>= (\c -> styleContextAddClass c "linked")
+
+    button2 <- buttonNew
+    arrowNew ArrowTypeLeft ShadowTypeNone >>= (\a-> containerAdd button2 a)
+    containerAdd box button2
+
+    button3 <- buttonNew
+    arrowNew ArrowTypeRight ShadowTypeNone >>= (\a -> containerAdd button3 a)
+    containerAdd box button3
+
+    headerBarPackStart hb box
+    textViewNew >>= (\w -> containerAdd win w)
+
+    return win
 
   main :: IO ()
   main = do
     _ <- GI.init Nothing
 
-    win <- windowNew WindowTypeToplevel
-    windowSetTitle win "ListBox Demo"
-    containerSetBorderWidth win 10
-
-    boxOuter <- boxNew OrientationVertical 6
-    containerAdd win boxOuter
-
-    listBox <- listBoxNew
-    listBoxSetSelectionMode listBox SelectionModeNone
-    boxPackStart boxOuter listBox True True 0
-
-    row <- listBoxRowNew
-    hbox <- boxNew OrientationHorizontal 50
-    containerAdd row hbox
-    vbox <-boxNew OrientationVertical 0
-    boxPackStart hbox vbox True True 0
-
-    label1 <- labelNew (Just "Automatic Date & Time")
-    labelSetXalign label1 0
-    label2 <- labelNew (Just "Requires internet access")
-    labelSetXalign label2 0
-    boxPackStart vbox label1 True True 0
-    boxPackStart vbox label2 True True 0
-
-    switch <- switchNew
-    setWidgetValign switch AlignCenter
-    boxPackStart hbox switch False True 0
-
-    containerAdd listBox row
-
-    row <- listBoxRowNew
-    hbox <- boxNew OrientationHorizontal 50
-    containerAdd row hbox
-    label <- labelNew (Just "Enable Automatic Update")
-    labelSetXalign label 0
-    check <- checkButtonNew
-    boxPackStart hbox label True True 0
-    boxPackStart hbox check False True 0
-
-    containerAdd listBox row
-
-    row <- listBoxRowNew
-    hbox <- boxNew OrientationHorizontal 50
-    containerAdd row hbox
-    label <- labelNew (Just "Date Format")
-    labelSetXalign label 0
-    combo <- comboBoxTextNew
-    comboBoxTextInsert combo 0 (Just"0") "24-hour"
-    comboBoxTextInsert combo 1 (Just "1") "AM/PM"
-    boxPackStart hbox label True True 0
-    boxPackStart hbox combo False True 0
-
-    containerAdd listBox row
-
-    listbox2 <- listBoxNew
-    --items <- ["This"," is"," a"," sorted"," ListBox"," Fail"]
-    lb <- listBoxRowNew
-    dat <- labelNew (Just "This")
-    containerAdd lb dat
-    listBoxInsert listbox2 lb (-1)
-
-    lb <- listBoxRowNew
-    dat <- labelNew (Just "is")
-    containerAdd lb dat
-    listBoxInsert listbox2 lb (-1)
-
-    lb <- listBoxRowNew
-    dat <- labelNew (Just "a")
-    containerAdd lb dat
-    listBoxInsert listbox2 lb (-1)
-
-    lb <- listBoxRowNew
-    dat <- labelNew (Just "sorted")
-    containerAdd lb dat
-    listBoxInsert listbox2 lb (-1)
-
-    lb <- listBoxRowNew
-    dat <- labelNew (Just "ListBox")
-    containerAdd lb dat
-    listBoxInsert listbox2 lb (-1)
-
-    lb <- listBoxRowNew
-    dat <- labelNew (Just "Fail")
-    containerAdd lb dat
-    listBoxInsert listbox2 lb (-1)
-
-    -- how do I solve this silly type error???
-    onListBoxRowSelected listbox2 (\(Just row) -> listBoxRowGetIndex row >>= print)
-
-
-    boxPackStart boxOuter listbox2 True True 0
-    widgetShowAll listbox2
-
+    win <- headerBarWindow
     _ <- onWidgetDestroy win mainQuit
     widgetShowAll win
     GI.main
